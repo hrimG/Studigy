@@ -31,7 +31,7 @@ function CourseScreen() {
                             <h3 className="text-uppercase">{course.name}</h3>
                         </ListGroup.Item>
                         <ListGroup.Item>
-                            <Difficulty value={course.difficulty} text={`${course.numReviews} reviews`} color={'#f8e825'} />
+                            <Difficulty value={course.difficulty} text={`${course.numComments} comments`} color={'#f8e825'} />
                         </ListGroup.Item>
                         <ListGroup.Item>
                             Tutor: {course.tutor}

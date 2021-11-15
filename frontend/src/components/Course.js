@@ -17,7 +17,7 @@ function Course({ course }) {
                 </Link>
                 <Card.Text as="div">
                     <div className="my-3">
-                        <Difficulty value={course.difficulty} text={` ${course.numReviews} reviews`} color={'#fde825'} />
+                        <Difficulty value={course.difficulty} text={`${course.numComments} comments`} color={'#fde825'} />
                     </div>
                 </Card.Text>
                 <Card.Text as="h5">
