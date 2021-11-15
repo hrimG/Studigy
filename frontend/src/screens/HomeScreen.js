@@ -1,9 +1,20 @@
-import React from 'react'
+import React, { useState, useEffect} from 'react'
 import { Row, Col } from 'react-bootstrap'
-import courses from '../courses'
 import Course from '../components/Course'
-
+import axios from 'axios'
 function HomeScreen() {
+    const [courses, setCourses] = useState([])
+
+    useEffect(() => {
+        async function fetchCourses(){
+            const { data } = await axios.get('/api/courses/')
+            setCourses(data)
+        }
+
+        fetchCourses()
+        
+    }, [])
+
     return (
         <div>
             <h1> Latest Courses</h1>

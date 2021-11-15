@@ -1,13 +1,23 @@
-import React from 'react'
+import React, { useState, useEffect} from 'react'
 import { useParams } from 'react-router'
 import { Link } from 'react-router-dom'
 import { Row, Col, Image, ListGroup, Button, Card } from 'react-bootstrap'
 import Difficulty from '../components/Difficulty'
-import courses from '../courses'
+import axios from 'axios'
 
-function CourseScreen({ match }) {
-    const params = useParams();
-    const course = courses.find((c) => c._id === params.id)
+function CourseScreen() {
+    const params = useParams();    
+    const [course, setCourse] = useState([])
+
+    useEffect(() => {
+        async function fetchCourse(){
+            const { data } = await axios.get(`/api/courses/${params.id}`)
+            setCourse(data)
+        }
+        fetchCourse()
+        
+    }, [params.id])
+    
     return (
         <div>
             <Link to='/' className='btn btn-light my-3'>Go Back</Link>
