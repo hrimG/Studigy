@@ -1,11 +1,10 @@
-import React, { useState, useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col } from 'react-bootstrap'
 import Course from '../components/Course'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import { listCourses } from '../actions/courseActions'
-import { courseListReducer } from '../reducers/courseReducers'
 
 function HomeScreen() {
     const dispatch = useDispatch()

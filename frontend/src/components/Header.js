@@ -1,9 +1,20 @@
 import React from 'react'
-import { Nav, Navbar, Container } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import { Nav, Navbar, Container, NavDropdown } from 'react-bootstrap'
 import 'font-awesome/css/font-awesome.min.css';
 //import { LinkContainer } from 'react-router-bootstrap'
 import { Link } from 'react-router-dom'
+import { logout } from '../actions/userActions'
+
 function Header() {
+    const userLogin = useSelector(state => state.userLogin)
+    const { userInfo } = userLogin
+
+    const dispatch = useDispatch()
+
+    const logoutHandler = () => {
+        dispatch(logout())
+    }
     return (
         <header>
            <Navbar bg="primary" variant="dark" expand="lg" collapseOnSelect>
@@ -17,8 +28,18 @@ function Header() {
                             {/* <Nav.Link href="/courses"><i className="fas fa-book-open"></i> Courses</Nav.Link> */}
                             <Link to='/courses' className='nav-link'><i className="fas fa-book-open"></i> Courses</Link>
 
+                            {userInfo ? (
+                                <NavDropdown title={userInfo.name} id='username'>
+                                    <NavDropdown.Item>
+                                        <Link to='/profile' className='nav-link'>Profile</Link>
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
+                                </NavDropdown>
+                            ): (
+                                <Link to='/login' className='nav-link'><i className=" fa fa-user"></i> Login</Link>
+                            )}
+
                             {/* <Nav.Link href="/login"><i className=" fa fa-user"></i> Login</Nav.Link> */}
-                            <Link to='/login' className='nav-link'><i className=" fa fa-user"></i> Login</Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

@@ -22,8 +22,8 @@ export const listCourses = () => async (dispatch) => {
     }catch(error){
         dispatch({
             type: COURSE_LIST_FAIL,
-            payload: error.response && error.response.data.message
-            ? error.response.data.message
+            payload: error.response && error.response.data.detail
+            ? error.response.data.detail
             : error.message
         })
     }
@@ -42,8 +42,8 @@ export const listCourseDetails = (id) => async (dispatch) => {
     }catch(error){
         dispatch({
             type: COURSE_DETAILS_FAIL,
-            payload: error.response && error.response.data.message
-            ? error.response.data.message
+            payload: error.response && error.response.data.detail
+            ? error.response.data.detail
             : error.message
         })
     }
