@@ -26,7 +26,7 @@ function Header() {
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto">
                             {/* <Nav.Link href="/courses"><i className="fas fa-book-open"></i> Courses</Nav.Link> */}
-                            <Link to='/courses' className='nav-link'><i className="fas fa-book-open"></i> Courses</Link>
+                            <Link to='/schedule' className='nav-link'><i className="fas fa-calendar"></i> Schedule</Link>
 
                             {userInfo ? (
                                 <NavDropdown title={userInfo.name} id='username'>

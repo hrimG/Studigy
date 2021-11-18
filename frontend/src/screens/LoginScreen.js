@@ -38,7 +38,7 @@ function LoginScreen() {
             {error && <Message variant='danger'>{error}</Message>}
             { loading && <Loader />}
             <Form onSubmit={ submitHandler }>
-                <Form.Group controlId='email'>
+                <Form.Group controlId='email' className='mb-3'>
                     <Form.Label>Email Address</Form.Label>
                     <Form.Control
                         type='email'
@@ -48,7 +48,7 @@ function LoginScreen() {
                     >
                     </Form.Control>
                 </Form.Group>
-                <Form.Group controlId='password'>
+                <Form.Group controlId='password' className='mb-3'>
                     <Form.Label>Password</Form.Label>
                     <Form.Control
                         type='password'
@@ -63,6 +63,7 @@ function LoginScreen() {
             <Row className='py-3'>
                 <Col>
                     New Customer? <Link
+                    style={{textDecoration:'none'}}
                     to={redirect ? `/register?redirect=${redirect}` : '/register'}>
                     Register
                     </Link>

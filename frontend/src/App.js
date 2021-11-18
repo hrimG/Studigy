@@ -8,6 +8,7 @@ import CourseScreen from './screens/CourseScreen'
 import LoginScreen from './screens/LoginScreen'
 import RegisterScreen from './screens/RegisterScreen'
 import ProfileScreen from './screens/ProfileScreen'
+import ScheduleScreen from './screens/ScheduleScreen'
 
 function App() {
   return (
@@ -21,6 +22,8 @@ function App() {
             <Route path='/login' element={<LoginScreen />} />
             <Route path='/profile' element={<ProfileScreen />} />
             <Route path='/course/:id' element={<CourseScreen />} />
+            <Route path='/schedule' element={<ScheduleScreen />} />
+            <Route path='/schedule/:id' element={<ScheduleScreen />} />
           </Routes>
         </Container>
       </main>

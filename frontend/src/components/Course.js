@@ -4,13 +4,13 @@ import Difficulty from './Difficulty'
 import { Link } from 'react-router-dom'
 function Course({ course }) {
     return (
-        <Card className="my-3 p-3 rounded h-100">
+        <Card className="p-3 rounded h-100">
             <Link to={`/course/${course._id}`}>
                 <Card.Img src ={course.image} />
             </Link>
 
             <Card.Body>
-                <Link to={`/course/${course._id}`}>
+                <Link style={{textDecoration:'none'}} to={`/course/${course._id}`}>
                     <Card.Title as="div">
                         <strong className="text-uppercase">{course.name}</strong>
                     </Card.Title>

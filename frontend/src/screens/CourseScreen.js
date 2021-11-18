@@ -1,15 +1,18 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router'
-import { Link } from 'react-router-dom'
-import { Row, Col, Image, ListGroup, Button, Card } from 'react-bootstrap'
+import { Link, useNavigate } from 'react-router-dom'
+import { Row, Col, Image, ListGroup, Button, Card, Form } from 'react-bootstrap'
 import Difficulty from '../components/Difficulty'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import { listCourseDetails } from '../actions/courseActions'
 
 function CourseScreen() {
-    const params = useParams();    
+    const [lecs, setLecs] = useState(1)
+
+    const params = useParams()
+    const navigate = useNavigate()   
     const dispatch = useDispatch()
     const courseDetails = useSelector(state => state.courseDetails)
     const { loading, error, course } = courseDetails
@@ -17,6 +20,9 @@ function CourseScreen() {
         dispatch(listCourseDetails(params.id))
     }, [params, dispatch])
     
+    const addToCartHandler = () => {
+        navigate(`/schedule/${params.id}?lecs=${lecs}`)
+    }
     return (
         <div>
             <Link to='/' className='btn btn-light my-3'>Go Back</Link>
@@ -64,9 +70,37 @@ function CourseScreen() {
                                                 </Col>
                                             </Row>
                                         </ListGroup.Item>
+                                        {course.lecturesScheduled > 0 && (
+                                            <ListGroup.Item>
+                                                <Row>
+                                                    <Col> Lecture No. </Col>
+                                                    <Col xs='auto' className='my-1'>
+                                                        <Form.Control
+                                                            as="select"
+                                                            value={lecs}
+                                                            onChange={(e) => setLecs(e.target.value)}
+                                                        >
+                                                            {
+                                                                [...Array(course.lecturesScheduled).keys()].map((x) => (
+                                                                    <option key={x+1} value={x+1}>
+                                                                        {x+1}
+                                                                    </option>
+                                                                ))
+                                                            }
+                                                        </Form.Control>
+                                                    </Col>
+                                                </Row>
+                                            </ListGroup.Item>
+                                        )}
                                         <ListGroup.Item >
                                             <Row>
-                                                <Button className='btn btn-block align-items-center' disabled={course.lecturesScheduled === 0} type='button'>Scheduler</Button>
+                                                <Button 
+                                                    onClick={ addToCartHandler }
+                                                    className='btn btn-block align-items-center' 
+                                                    disabled={course.lecturesScheduled === 0} 
+                                                    type='button'>
+                                                    Add to Schedule
+                                                </Button>
                                             </Row>
                                         </ListGroup.Item>
                                     </ListGroup>
