@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.tokens import RefreshToken
-from .models import Course
+from .models import Course, Schedule, Lecture, AttendancePreference
 
 class UserSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField(read_only=True)
@@ -38,3 +38,38 @@ class CourseSerializer(serializers.ModelSerializer):
         model = Course
         fields = '__all__'
 
+class AttendancePreferenceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AttendancePreference
+        fields = '__all__'
+
+class LectureSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Lecture
+        fields = '__all__'
+
+class ScheduleSerializer(serializers.ModelSerializer):
+    lectures = serializers.SerializerMethodField(read_only=True)
+    attendancePreference = serializers.SerializerMethodField(read_only=True)
+    user = serializers.SerializerMethodField(read_only=True)
+    class Meta:
+        model = Schedule
+        fields = '__all__'
+
+    def get_lectures(self, obj):
+        items = obj.lecture_set.all()
+        serializer = LectureSerializer(items, many=True)
+        return serializer.data
+
+    def get_attendancePreference(self, obj):
+        try:
+            ap = AttendancePreferenceSerializer(
+                obj.attendancepreference, many=False).data
+        except:
+            ap = False
+        return ap
+
+    def get_user(self, obj):
+        items = obj.user
+        serializer = UserSerializer(items, many=False)
+        return serializer.data

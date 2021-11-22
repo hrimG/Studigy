@@ -1,6 +1,6 @@
-import { SCHEDULE_ADD_LECTURE, SCHEDULE_REMOVE_LECTURE } from '../constants/scheduleConstants'
+import { SCHEDULE_ADD_LECTURE, SCHEDULE_REMOVE_LECTURE, SCHEDULE_SAVE_ATTENDANCE_PREFERENCE, SCHEDULE_CLEAR_LECTURES } from '../constants/scheduleConstants'
 
-export const scheduleReducer = (state = { scheduledLectures: [] }, action) => {
+export const scheduleReducer = (state = { scheduledLectures: [], attendancePreference: {} }, action) => {
     switch(action.type){
         case SCHEDULE_ADD_LECTURE:
             const lecture = action.payload
@@ -24,6 +24,16 @@ export const scheduleReducer = (state = { scheduledLectures: [] }, action) => {
             return{
                 ...state,
                 scheduledLectures: state.scheduledLectures.filter(x => x.course !== action.payload)
+            }
+        case SCHEDULE_SAVE_ATTENDANCE_PREFERENCE:
+            return{
+                ...state,
+                attendancePreference: action.payload
+            }
+        case SCHEDULE_CLEAR_LECTURES:
+            return{
+                ...state,
+                scheduledLectures: []
             }
         default:
             return state

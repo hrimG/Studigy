@@ -38,7 +38,7 @@ class Schedule(models.Model):
     _id = models.AutoField(primary_key=True, editable=False)
 
     def __str__(self):
-        return str(self.createdAt)
+        return str(self._id)
 
 class Lecture(models.Model):
     course = models.ForeignKey(Course, on_delete=models.SET_NULL, null=True)
@@ -46,6 +46,7 @@ class Lecture(models.Model):
     name = models.CharField(max_length=200, null=True, blank=True)
     tutor = models.CharField(max_length=200, null=True, blank=True)
     image = models.CharField(max_length=200, null=True, blank=True)
+    #date
     _id = models.AutoField(primary_key=True, editable=False)
 
     def __str__(self):

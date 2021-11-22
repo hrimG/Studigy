@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { SCHEDULE_ADD_LECTURE, SCHEDULE_REMOVE_LECTURE } from '../constants/scheduleConstants'
+import { SCHEDULE_ADD_LECTURE, SCHEDULE_REMOVE_LECTURE, SCHEDULE_SAVE_ATTENDANCE_PREFERENCE } from '../constants/scheduleConstants'
 
 export const addToSchedule = (id, lecs) => async (dispatch, getState) => {
     const {data} = await axios.get(`/api/courses/${id}`)
@@ -24,4 +24,12 @@ export const removeFromSchedule = (id) => (dispatch, getState) => {
         payload: id
     })
     localStorage.setItem('scheduledLectures', JSON.stringify(getState().schedule.scheduledLectures))
+}
+
+export const saveAttendancePreference = (data) => (dispatch) => {
+    dispatch({
+        type: SCHEDULE_SAVE_ATTENDANCE_PREFERENCE,
+        payload: data
+    })
+    localStorage.setItem('attendancePreference', JSON.stringify(data))
 }

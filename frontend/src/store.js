@@ -4,6 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { courseListReducer, courseDetailsReducer } from './reducers/courseReducers'
 import { userLoginReducer, userRegisterReducer, userDetailsReducer, userUpdateProfileReducer } from './reducers/userReducers'
 import { scheduleReducer } from './reducers/scheduleReducers'
+import { scheduleCreateReducer, scheduleDetailsReducer, scheduleListMyReducer } from './reducers/scheduleCreateReducer'
 
 const reducer = combineReducers({
     courseList: courseListReducer,
@@ -13,6 +14,9 @@ const reducer = combineReducers({
     userRegister: userRegisterReducer,
     userDetails: userDetailsReducer,
     userUpdateProfile: userUpdateProfileReducer,
+    scheduleCreate: scheduleCreateReducer,
+    scheduleDetails: scheduleDetailsReducer,
+    scheduleListMy: scheduleListMyReducer,
 })
 
 const scheduledLecturesFromStorage = localStorage.getItem('scheduledLectures') ?
@@ -21,8 +25,14 @@ const scheduledLecturesFromStorage = localStorage.getItem('scheduledLectures') ?
 const userInfoFromStorage = localStorage.getItem('userInfo') ?
     JSON.parse(localStorage.getItem('userInfo')) : null
 
+const attendancePreferenceFromStorage = localStorage.getItem('attendancePreference') ?
+    JSON.parse(localStorage.getItem('attendancePreference')) : {}
+
 const initialState = {
-    schedule: { scheduledLectures: scheduledLecturesFromStorage},
+    schedule: { 
+        scheduledLectures: scheduledLecturesFromStorage,
+        attendancePreference: attendancePreferenceFromStorage
+    },
     userLogin: { userInfo: userInfoFromStorage}
 }
 

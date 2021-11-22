@@ -47,7 +47,7 @@ function RegisterScreen() {
             {error && <Message variant='danger'>{error}</Message>}
             { loading && <Loader />}
             <Form onSubmit={ submitHandler }>
-                <Form.Group controlId='name'>
+                <Form.Group controlId='name' className='mb-3'>
                     <Form.Label>Name</Form.Label>
                     <Form.Control
                         required
@@ -58,7 +58,7 @@ function RegisterScreen() {
                     >
                     </Form.Control>
                 </Form.Group>
-                <Form.Group controlId='email'>
+                <Form.Group controlId='email' className='mb-3'>
                     <Form.Label>Email Address</Form.Label>
                     <Form.Control
                         required
@@ -69,7 +69,7 @@ function RegisterScreen() {
                     >
                     </Form.Control>
                 </Form.Group>
-                <Form.Group controlId='password'>
+                <Form.Group controlId='password' className='mb-3'>
                     <Form.Label>Password</Form.Label>
                     <Form.Control
                         required
@@ -80,7 +80,7 @@ function RegisterScreen() {
                     >
                     </Form.Control>
                 </Form.Group>
-                <Form.Group controlId='confirmPassword'>
+                <Form.Group controlId='confirmPassword' className='mb-3'>
                     <Form.Label>Confirm Password</Form.Label>
                     <Form.Control
                         required

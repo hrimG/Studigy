@@ -30,7 +30,7 @@ function ScheduleScreen() {
         dispatch(removeFromSchedule(id))
     }
     const attendanceHandler = () => {
-        navigate(`/login?redirect=attendance`)
+        navigate('/login?redirect=attendance')
     }
     return (
         <Row>
@@ -42,26 +42,26 @@ function ScheduleScreen() {
                     </Message>
                 ): (
                     <ListGroup variant='flush'>
-                        {scheduledLectures.map(course => (
+                        {scheduledLectures.map(lec => (
                             <ListGroup.Item>
                                 <Row>
                                     <Col md={2}>
-                                        <Image src={course.image} alt={course.name} fluid rounded/>
+                                        <Image src={lec.image} alt={lec.name} fluid rounded/>
                                     </Col>
                                     <Col md={3}>
-                                        <Link to={`/course/${course.course}`}>{course.name}</Link>
+                                        <Link style={{textDecoration:'none'}} to={`/course/${lec.course}`}>{lec.name}</Link>
                                     </Col>
                                     <Col md={2}>
-                                        {course.tutor}
+                                        {lec.tutor}
                                     </Col>
                                     <Col md={3}>
                                         <Form.Control
                                             as="select"
-                                            value={course.lecs}
-                                            onChange={(e) => dispatch(addToSchedule(course.course, e.target.value))}
+                                            value={lec.lecs}
+                                            onChange={(e) => dispatch(addToSchedule(lec.course, e.target.value))}
                                         >
                                             {
-                                                [...Array(course.lecturesScheduled).keys()].map((x) => (
+                                                [...Array(lec.lecturesScheduled).keys()].map((x) => (
                                                     <option key={x+1} value={x+1}>
                                                         {x+1}
                                                     </option>
@@ -73,7 +73,7 @@ function ScheduleScreen() {
                                         <Button
                                             type='button'
                                             variant='light'
-                                            onClick={() => removeFromScheduleHandler(course.course)}
+                                            onClick={() => removeFromScheduleHandler(lec.course)}
                                         >
                                             <i className='fas fa-trash'></i>
                                         </Button>
