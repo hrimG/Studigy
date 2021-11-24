@@ -36,7 +36,7 @@ function ProfileScreen() {
             navigate('/login')
         }
         else{
-            if(!user || !user.name || success){
+            if(!user || !user.name || success || userInfo._id !== user._id){
                 dispatch({type:USER_UPDATE_PROFILE_RESET})
                 dispatch(getUserDetails('profile'))
                 dispatch(listMySchedules())
@@ -71,7 +71,7 @@ function ProfileScreen() {
                 {error && <Message variant='danger'>{error}</Message>}
                 { loading && <Loader />}
                 <Form onSubmit={ submitHandler }>
-                    <Form.Group controlId='name'>
+                    <Form.Group controlId='name' className='mb-3'>
                         <Form.Label>Name</Form.Label>
                         <Form.Control
                             required
@@ -82,7 +82,7 @@ function ProfileScreen() {
                         >
                         </Form.Control>
                     </Form.Group>
-                    <Form.Group controlId='email'>
+                    <Form.Group controlId='email' className='mb-3'>
                         <Form.Label>Email Address</Form.Label>
                         <Form.Control
                             required
@@ -93,7 +93,7 @@ function ProfileScreen() {
                         >
                         </Form.Control>
                     </Form.Group>
-                    <Form.Group controlId='password'>
+                    <Form.Group controlId='password' className='mb-3'>
                         <Form.Label>Password</Form.Label>
                         <Form.Control
                             type='password'
@@ -103,7 +103,7 @@ function ProfileScreen() {
                         >
                         </Form.Control>
                     </Form.Group>
-                    <Form.Group controlId='confirmPassword'>
+                    <Form.Group controlId='confirmPassword' className='mb-3'>
                         <Form.Label>Confirm Password</Form.Label>
                         <Form.Control
                             type='password'
@@ -139,13 +139,16 @@ function ProfileScreen() {
                                     <td>{schedule._id}</td>
                                     <td>{schedule.createdAt.substring(0,10)}</td>
                                     <td>lectures here</td>
-                                    <td>{schedule.isAttended ? 'Yes' : (
-                                        <i className='fas fa-times' style={{ color: 'red' }}></i>
-                                    )}</td>
+                                    <td>{schedule.isAttended ? (
+                                            <i className='fas fa-check' style={{ color: 'green' }}></i>
+                                            ) : (
+                                                <i className='fas fa-times' style={{ color: 'red' }}></i>
+                                        )}
+                                    </td>
                                     <td>
-                                        <Button className='btn btn-primary btn-sm'>
-                                            <Link style={{textDecoration:'none', color:'#fff'}} to={`/myschedule/${schedule._id}`}>Details</Link>
-                                        </Button>
+                                        <Link to={`/myschedule/${schedule._id}`}>
+                                            <Button className='btn-sm'>Details</Button>
+                                        </Link>
                                     </td>
                                 </tr>
                             ))}

@@ -19,8 +19,6 @@ function Header() {
         <header>
            <Navbar bg="primary" variant="dark" expand="lg" collapseOnSelect>
                 <Container>
-                
-                    {/* <Navbar.Brand href="/">STUDIGY</Navbar.Brand> */}
                     <Link to='/' className='navbar-brand'>STUDIGY</Link>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
@@ -40,6 +38,19 @@ function Header() {
                             )}
 
                             {/* <Nav.Link href="/login"><i className=" fa fa-user"></i> Login</Nav.Link> */}
+                            {userInfo && userInfo.isAdmin && (
+                                <NavDropdown title='Admin' id='adminmenu'>
+                                    <NavDropdown.Item>
+                                        <Link to='/admin/userlist' className='nav-link'>Users</Link>
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Item>
+                                        <Link to='/admin/courselist' className='nav-link'>Courses</Link>
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Item>
+                                        <Link to='/admin/schedulelist' className='nav-link'>Schedules</Link>
+                                    </NavDropdown.Item>
+                                </NavDropdown>
+                            )}
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
