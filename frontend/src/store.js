@@ -1,7 +1,13 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { courseListReducer, courseDetailsReducer } from './reducers/courseReducers'
+import { 
+    courseListReducer, 
+    courseDetailsReducer, 
+    courseDeleteReducer, 
+    courseCreateReducer,
+    courseUpdateReducer, 
+} from './reducers/courseReducers'
 import { 
     userLoginReducer, 
     userRegisterReducer, 
@@ -12,12 +18,22 @@ import {
     userUpdateReducer
 } from './reducers/userReducers'
 import { scheduleReducer } from './reducers/scheduleReducers'
-import { scheduleCreateReducer, scheduleDetailsReducer, scheduleListMyReducer } from './reducers/scheduleCreateReducer'
+import { 
+    scheduleCreateReducer, 
+    scheduleDetailsReducer, 
+    scheduleListMyReducer,
+    scheduleListReducer, 
+    scheduleAttendReducer,
+} from './reducers/scheduleCreateReducer'
 
 const reducer = combineReducers({
     courseList: courseListReducer,
     userLogin: userLoginReducer,
+    
     courseDetails: courseDetailsReducer,
+    courseDelete: courseDeleteReducer,
+    courseCreate: courseCreateReducer,
+    courseUpdate: courseUpdateReducer,
     schedule: scheduleReducer,
     
     userRegister: userRegisterReducer,
@@ -30,6 +46,8 @@ const reducer = combineReducers({
     scheduleCreate: scheduleCreateReducer,
     scheduleDetails: scheduleDetailsReducer,
     scheduleListMy: scheduleListMyReducer,
+    scheduleList: scheduleListReducer,
+    scheduleAttend: scheduleAttendReducer,
 })
 
 const scheduledLecturesFromStorage = localStorage.getItem('scheduledLectures') ?

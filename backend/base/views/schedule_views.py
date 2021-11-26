@@ -63,6 +63,12 @@ def getMySchedules(request):
     serializer = ScheduleSerializer(schedules, many=True)
     return Response(serializer.data)
 
+@api_view(['GET'])
+@permission_classes([IsAdminUser])
+def getSchedules(request):
+    schedules = Schedule.objects.all()
+    serializer = ScheduleSerializer(schedules, many=True)
+    return Response(serializer.data)
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -84,7 +90,7 @@ def getScheduleById(request, pk):
             status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['PUT'])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAdminUser])
 def updateScheduleToAttended(request, pk):
     schedule = Schedule.objects.get(_id=pk)
 

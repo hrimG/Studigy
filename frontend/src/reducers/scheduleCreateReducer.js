@@ -12,6 +12,15 @@ import {
     SCHEDULE_LIST_MY_SUCCESS, 
     SCHEDULE_LIST_MY_FAIL,
     SCHEDULE_LIST_MY_RESET,
+
+    SCHEDULE_LIST_REQUEST, 
+    SCHEDULE_LIST_SUCCESS, 
+    SCHEDULE_LIST_FAIL,
+
+    SCHEDULE_ATTEND_REQUEST, 
+    SCHEDULE_ATTEND_SUCCESS, 
+    SCHEDULE_ATTEND_FAIL,
+    SCHEDULE_ATTEND_RESET,
 } from '../constants/scheduleConstants'
 
 export const scheduleCreateReducer = (state={}, action) => {
@@ -83,6 +92,57 @@ export const scheduleListMyReducer = (state = { schedules: [] }, action) => {
             return {
                 schedules: []
             }
+
+        default:
+            return state
+    }
+}
+
+export const scheduleListReducer = (state = { schedules: [] }, action) => {
+    switch (action.type) {
+        case SCHEDULE_LIST_REQUEST:
+            return {
+                loading: true
+            }
+
+        case SCHEDULE_LIST_SUCCESS:
+            return {
+                loading: false,
+                schedules: action.payload
+            }
+
+        case SCHEDULE_LIST_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
+
+        default:
+            return state
+    }
+}
+
+export const scheduleAttendReducer = (state = {}, action) => {
+    switch (action.type) {
+        case SCHEDULE_ATTEND_REQUEST:
+            return {
+                loading: true
+            }
+
+        case SCHEDULE_ATTEND_SUCCESS:
+            return {
+                loading: false,
+                success: true
+            }
+
+        case SCHEDULE_ATTEND_FAIL:
+            return {
+                loading: false,
+                error: action.payload
+            }
+
+        case SCHEDULE_ATTEND_RESET:
+            return {}
 
         default:
             return state

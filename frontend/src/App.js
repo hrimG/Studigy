@@ -14,6 +14,10 @@ import ConfirmationScreen from './screens/ConfirmationScreen'
 import ScheduleDetailsScreen from './screens/ScheduleDetailsScreen'
 import UserListScreen from './screens/UserListScreen'
 import UserEditScreen from './screens/UserEditScreen'
+import CourseListScreen from './screens/CourseListScreen'
+import CourseEditScreen from './screens/CourseEditScreen'
+import ScheduleListScreen from './screens/ScheduleListScreen'
+
 
 function App() {
   return (
@@ -33,8 +37,13 @@ function App() {
             <Route path='/schedule' element={<ScheduleScreen />} />
             <Route path='/schedule/:id' element={<ScheduleScreen />} />
 
-            <Route path='/admin/userList' element={<UserListScreen />} />
+            <Route path='/admin/userlist' element={<UserListScreen />} />
             <Route path='/admin/user/:id/edit' element={<UserEditScreen />} />
+
+            <Route path='/admin/courselist' element={<CourseListScreen />} />
+            <Route path='/admin/course/:id/edit' element={<CourseEditScreen />} />
+
+            <Route path='/admin/schedulelist' element={<ScheduleListScreen />} />
           </Routes>
         </Container>
       </main>

@@ -1,26 +1,41 @@
 import React, { useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom'
-import { Row, Col, ListGroup, Image } from 'react-bootstrap'
+import { Link, useParams, useNavigate } from 'react-router-dom'
+import { Row, Col, ListGroup, Image, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { getScheduleDetails } from '../actions/scheduleCreateActions'
+import { getScheduleDetails, attendSchedule } from '../actions/scheduleCreateActions'
+import { SCHEDULE_ATTEND_RESET } from '../constants/scheduleConstants'
 
 function ScheduleDetailsScreen() {
     const dispatch = useDispatch()
     const params = useParams()
+    const navigate = useNavigate()
 
     const scheduleId = params.id
 
     const scheduleDetails= useSelector(state => state.scheduleDetails)
     const {myschedule, error, loading} = scheduleDetails
 
+    const scheduleAttend= useSelector(state => state.scheduleAttend)
+    const {loading:loadingAttend, success:successAttend} = scheduleAttend
+
+    const userLogin= useSelector(state => state.userLogin)
+    const { userInfo } = userLogin
 
     useEffect(() => {
-        if(!myschedule || myschedule._id!== Number(scheduleId)){
+        if(!userInfo){
+            navigate('/login')
+        }
+        if(!myschedule || myschedule._id!== Number(scheduleId) || successAttend ){
+            dispatch({ type: SCHEDULE_ATTEND_RESET })
             dispatch(getScheduleDetails(scheduleId))
         }
-    }, [myschedule, scheduleId, dispatch])
+    }, [myschedule, scheduleId, dispatch, successAttend, navigate, userInfo])
+
+    const attendHandler = () => {
+        dispatch(attendSchedule(myschedule))
+    }
 
     return loading ? (
         <Loader />
@@ -80,6 +95,18 @@ function ScheduleDetailsScreen() {
                                     <Message variant='warning'> Not Attended </Message>
                                 )}
                             </ListGroup>
+                            {loadingAttend && <Loader />}
+                            {userInfo && userInfo.isAdmin && !scheduleAttend.isDelivered && (
+                                <ListGroup.Item>
+                                    <Button
+                                        type='button'
+                                        className='btn btn-block'
+                                        onClick={attendHandler}
+                                    >
+                                        Mark As Attended
+                                    </Button>
+                                </ListGroup.Item>
+                            )}
                             <ListGroup variant='flush'>
                                 <h2>Vaccination Status</h2>
                                 <div>  

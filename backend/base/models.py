@@ -7,7 +7,7 @@ from django.db.models.base import Model
 class Course(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=200, null=True, blank=True)
-    image = models.ImageField(null=True, blank=True)
+    image = models.ImageField(null=True, blank=True, default='/sample.jpg')
     description = models.TextField(null=True, blank=True)
     difficulty = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)
     tutor = models.CharField(max_length=200, null=True, blank=True)
