@@ -21,7 +21,7 @@ function HomeScreen() {
             {loading ? <Loader /> 
                 : error ? <Message variant='danger'>{ error }</Message>
                     :
-                    <Row className='mt-5'>
+                    <Row>
                         {courses.map(course =>(
                             <Col key={course._id} sm={12} md={6} lg={4} xl={3} style={{padding: "12px 12px"}}>
                                 <Course course = {course} />

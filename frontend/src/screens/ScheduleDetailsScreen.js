@@ -96,7 +96,7 @@ function ScheduleDetailsScreen() {
                                 )}
                             </ListGroup>
                             {loadingAttend && <Loader />}
-                            {userInfo && userInfo.isAdmin && !scheduleAttend.isDelivered && (
+                            {userInfo && userInfo.isAdmin && !myschedule.isAttended && (
                                 <ListGroup.Item>
                                     <Button
                                         type='button'

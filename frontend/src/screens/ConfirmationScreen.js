@@ -64,6 +64,9 @@ function ConfirmationScreen() {
                                             <Col md={2}>
                                                 {lec.tutor}
                                             </Col>
+                                            <Col md={2}>
+                                                lec no{/* add lec no here */}
+                                            </Col>
                                         </Row>
                                     </ListGroup.Item>
                                 ))}

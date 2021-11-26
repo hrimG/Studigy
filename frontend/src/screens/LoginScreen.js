@@ -62,7 +62,7 @@ function LoginScreen() {
             </Form>
             <Row className='py-3'>
                 <Col>
-                    New Customer? <Link
+                    Don't have an account? <Link
                     style={{textDecoration:'none'}}
                     to={redirect ? `/register?redirect=${redirect}` : '/register'}>
                     Register

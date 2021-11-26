@@ -31,7 +31,9 @@ function Header() {
                                     <NavDropdown.Item>
                                         <Link to='/profile' className='nav-link'>Profile</Link>
                                     </NavDropdown.Item>
-                                    <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
+                                    <NavDropdown.Item onClick={logoutHandler}>
+                                        <Link to='#' className='nav-link'>Logout</Link>
+                                    </NavDropdown.Item>
                                 </NavDropdown>
                             ): (
                                 <Link to='/login' className='nav-link'><i className=" fa fa-user"></i> Login</Link>

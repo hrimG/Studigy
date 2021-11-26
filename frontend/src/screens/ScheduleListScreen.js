@@ -37,7 +37,7 @@ function ScheduleListScreen() {
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>USER</th>
+                                    <th>STUDENT</th>
                                     <th>DATE</th>
                                     <th>ATTENDED</th>
                                 </tr>
