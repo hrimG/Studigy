@@ -161,8 +161,8 @@ function CourseEditScreen() {
                         <Form.Group controlId='description' className='mb-3'>
                             <Form.Label>Description</Form.Label>
                             <Form.Control
-
-                                type='text'
+                                as='textarea'
+                                row='5'
                                 placeholder='Enter description'
                                 value={description}
                                 onChange={(e) => setDescription(e.target.value)}

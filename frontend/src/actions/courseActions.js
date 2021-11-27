@@ -20,6 +20,10 @@ import {
     COURSE_UPDATE_SUCCESS, 
     COURSE_UPDATE_FAIL,
 
+    COURSE_CREATE_COMMENT_REQUEST, 
+    COURSE_CREATE_COMMENT_SUCCESS, 
+    COURSE_CREATE_COMMENT_FAIL,
+
 } from '../constants/courseConstants'
 
 export const listCourses = () => async (dispatch) => {
@@ -169,6 +173,43 @@ export const updateCourse = (course) => async (dispatch, getState) => {
     }catch(error){
         dispatch({
             type: COURSE_UPDATE_FAIL,
+            payload: error.response && error.response.data.detail
+            ? error.response.data.detail
+            : error.message
+        })
+    }
+}
+
+export const createCourseComment = (courseId, comment) => async (dispatch, getState) => {
+    try{
+        dispatch({
+            type: COURSE_CREATE_COMMENT_REQUEST
+        })
+
+        const {
+            userLogin: { userInfo }
+        } = getState()
+
+        const config = {
+            headers:{
+                'Content-type':'application/json',
+                'Authorization': `Bearer ${userInfo.token}`
+            }
+        }
+        const {data} = await axios.post(
+            `/api/courses/${courseId}/comments/`,
+            comment,
+            config
+        )
+
+        dispatch({
+            type: COURSE_CREATE_COMMENT_SUCCESS,
+            payload: data,
+        })
+
+    }catch(error){
+        dispatch({
+            type: COURSE_CREATE_COMMENT_FAIL,
             payload: error.response && error.response.data.detail
             ? error.response.data.detail
             : error.message

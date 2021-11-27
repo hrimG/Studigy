@@ -20,6 +20,11 @@ import {
     COURSE_UPDATE_SUCCESS, 
     COURSE_UPDATE_FAIL,
     COURSE_UPDATE_RESET,
+
+    COURSE_CREATE_COMMENT_REQUEST, 
+    COURSE_CREATE_COMMENT_SUCCESS, 
+    COURSE_CREATE_COMMENT_FAIL,
+    COURSE_CREATE_COMMENT_RESET,
 } from '../constants/courseConstants'
 
 export const courseListReducer = (state = {courses:[]}, action) => {
@@ -102,6 +107,25 @@ export const courseUpdateReducer = (state = {course:{}}, action) => {
 
         case COURSE_UPDATE_RESET:
             return {course:{}}
+
+        default:
+            return state
+    }
+}
+
+export const courseCommentCreateReducer = (state = {}, action) => {
+    switch(action.type){
+        case COURSE_CREATE_COMMENT_REQUEST:
+            return {loading: true}
+
+        case COURSE_CREATE_COMMENT_SUCCESS:
+            return {loading: false, success:true}
+        
+        case COURSE_CREATE_COMMENT_FAIL:
+            return {loading: false, error:action.payload}
+
+        case COURSE_CREATE_COMMENT_RESET:
+            return {}
 
         default:
             return state

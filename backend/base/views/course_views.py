@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 
 from django.contrib.auth.models import User
-from base.models import Course
+from base.models import Course, Comment
 from base.serializers import CourseSerializer
 
 from rest_framework import status
@@ -67,3 +67,42 @@ def uploadImage(request):
     course.image = request.FILES.get('image')
     course.save()
     return Response('Image was uploaded')
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def createCourseComment(request, pk):
+    user = request.user
+    course = Course.objects.get(_id=pk)
+    data = request.data
+
+    #1 Comment already exist
+    alreadyExists = course.comment_set.filter(user=user).exists()
+    if alreadyExists:
+        content = {'detail': 'Already posted for the Course'}
+        return Response(content, status=status.HTTP_400_BAD_REQUEST)
+
+    #2 No difficulty or 0
+    elif data['difficulty'] == 0:
+        content = {'detail': 'Please select a difficulty'}
+        return Response(content, status=status.HTTP_400_BAD_REQUEST)
+
+    #3 Create comment / doubt
+    else:
+        comment = Comment.objects.create(
+            user = user,
+            course = course,
+            name = user.first_name,
+            difficulty= data['difficulty'],
+            content = data['content'], 
+        )
+
+        comments = course.comment_set.all()
+        course.numComments = len(comments)
+
+        total = 0
+        for i in comments:
+            total += i.difficulty
+        course.difficulty = total / len(comments)
+        course.save()
+
+        return Response('Comment Added')
