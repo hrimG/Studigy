@@ -8,6 +8,7 @@ urlpatterns = [
     path('upload/', views.uploadImage, name="image-upload"),
 
     path('<str:pk>/comments/', views.createCourseComment, name="create-comment"),
+    path('top/', views.getTopCourses, name="top-courses"),
     path('<str:pk>/', views.getCourse, name="course"),
 
     path('update/<str:pk>/', views.updateCourse, name="course-update"),

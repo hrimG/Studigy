@@ -11,7 +11,17 @@ from rest_framework import status
 
 @api_view(['GET'])
 def getCourses(request):
-    courses = Course.objects.all()
+    query = request.query_params.get('keyword')
+    if query == None:
+        query = ''
+    
+    courses = Course.objects.filter(name__icontains=query)
+    serializer = CourseSerializer(courses, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getTopCourses(request):
+    courses = Course.objects.filter(difficulty__gte=4).order_by('-difficulty')[0:5]
     serializer = CourseSerializer(courses, many=True)
     return Response(serializer.data)
 

@@ -4,6 +4,7 @@ import { Nav, Navbar, Container, NavDropdown } from 'react-bootstrap'
 import 'font-awesome/css/font-awesome.min.css';
 //import { LinkContainer } from 'react-router-bootstrap'
 import { Link } from 'react-router-dom'
+import SearchBox from './SearchBox'
 import { logout } from '../actions/userActions'
 
 function Header() {
@@ -21,7 +22,10 @@ function Header() {
                 <Container>
                     <Link to='/' className='navbar-brand'>STUDIGY</Link>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
+
                     <Navbar.Collapse id="basic-navbar-nav">
+
+                        <SearchBox />
                         <Nav className="mr-auto">
                             {/* <Nav.Link href="/courses"><i className="fas fa-book-open"></i> Courses</Nav.Link> */}
                             <Link to='/schedule' className='nav-link'><i className="fas fa-calendar"></i> Schedule</Link>

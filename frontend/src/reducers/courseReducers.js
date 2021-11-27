@@ -25,6 +25,10 @@ import {
     COURSE_CREATE_COMMENT_SUCCESS, 
     COURSE_CREATE_COMMENT_FAIL,
     COURSE_CREATE_COMMENT_RESET,
+
+    COURSE_TOP_REQUEST, 
+    COURSE_TOP_SUCCESS, 
+    COURSE_TOP_FAIL,
 } from '../constants/courseConstants'
 
 export const courseListReducer = (state = {courses:[]}, action) => {
@@ -126,6 +130,22 @@ export const courseCommentCreateReducer = (state = {}, action) => {
 
         case COURSE_CREATE_COMMENT_RESET:
             return {}
+
+        default:
+            return state
+    }
+}
+
+export const courseTopOnesReducer = (state = {courses:[]}, action) => {
+    switch(action.type){
+        case COURSE_TOP_REQUEST:
+            return {loading: true, courses: []}
+
+        case COURSE_TOP_SUCCESS:
+            return {loading: false, courses:action.payload}
+        
+        case COURSE_TOP_FAIL:
+            return {loading: false, error:action.payload}
 
         default:
             return state

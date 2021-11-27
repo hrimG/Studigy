@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col } from 'react-bootstrap'
+import { useLocation } from 'react-router'
 import Course from '../components/Course'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
+import CourseCarousel from '../components/CourseCarousel'
 import { listCourses } from '../actions/courseActions'
 
 function HomeScreen() {
@@ -11,12 +13,17 @@ function HomeScreen() {
     const courseList = useSelector(state => state.courseList)
     const { error, loading, courses} = courseList
 
+    const location = useLocation() 
+    let keyword = location.search
+    console.log(keyword)
+    
     useEffect(() => {
-        dispatch(listCourses())
-    }, [dispatch])
+        dispatch(listCourses(keyword))
+    }, [dispatch, keyword])
 
     return (
         <div>
+            {!keyword &&  <CourseCarousel />}
             <h1> Latest Courses</h1>
             {loading ? <Loader /> 
                 : error ? <Message variant='danger'>{ error }</Message>

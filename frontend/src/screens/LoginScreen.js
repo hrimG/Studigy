@@ -9,8 +9,8 @@ import FormContainer from '../components/FormContainer'
 import { login } from '../actions/userActions'
 
 function LoginScreen() {
-    const location = useLocation(); 
-    const navigate = useNavigate();
+    const location = useLocation()
+    const navigate = useNavigate()
     const [email, setEmail ] = useState('')
     const [password, setPassword ] = useState('')
 

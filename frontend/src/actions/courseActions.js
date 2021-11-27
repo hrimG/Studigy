@@ -24,12 +24,16 @@ import {
     COURSE_CREATE_COMMENT_SUCCESS, 
     COURSE_CREATE_COMMENT_FAIL,
 
+    COURSE_TOP_REQUEST, 
+    COURSE_TOP_SUCCESS, 
+    COURSE_TOP_FAIL,
+
 } from '../constants/courseConstants'
 
-export const listCourses = () => async (dispatch) => {
+export const listCourses = (keyword= '') => async (dispatch) => {
     try{
         dispatch({ type: COURSE_LIST_REQUEST})
-        const { data } = await axios.get('/api/courses/')
+        const { data } = await axios.get(`/api/courses${keyword}`)
         
         dispatch({
             type: COURSE_LIST_SUCCESS,
@@ -39,6 +43,26 @@ export const listCourses = () => async (dispatch) => {
     }catch(error){
         dispatch({
             type: COURSE_LIST_FAIL,
+            payload: error.response && error.response.data.detail
+            ? error.response.data.detail
+            : error.message
+        })
+    }
+}
+
+export const listTopCourses = () => async (dispatch) => {
+    try{
+        dispatch({ type: COURSE_TOP_REQUEST})
+        const { data } = await axios.get(`/api/courses/top/`)
+        
+        dispatch({
+            type: COURSE_TOP_SUCCESS,
+            payload: data
+        })
+
+    }catch(error){
+        dispatch({
+            type: COURSE_TOP_FAIL,
             payload: error.response && error.response.data.detail
             ? error.response.data.detail
             : error.message
