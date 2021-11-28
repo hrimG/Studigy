@@ -15,7 +15,7 @@ def getCourses(request):
     if query == None:
         query = ''
     
-    courses = Course.objects.filter(name__icontains=query)
+    courses = Course.objects.filter(name__startswith=query)
     serializer = CourseSerializer(courses, many=True)
     return Response(serializer.data)
 

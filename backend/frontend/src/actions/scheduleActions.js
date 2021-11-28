@@ -12,7 +12,7 @@ export const addToSchedule = (id, lecs) => async (dispatch, getState) => {
             image: data.image,
             tutor: data.tutor,
             lecturesScheduled: data.lecturesScheduled,
-            lecs
+            lecs: lecs,
         }
     })
     localStorage.setItem('scheduledLectures', JSON.stringify(getState().schedule.scheduledLectures))

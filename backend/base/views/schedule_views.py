@@ -44,7 +44,7 @@ def addLectures(request):
                course = course,
                schedule = schedule,
                name = course.name,
-               #lec number / date,
+               lecs = i['lecs'],
                tutor = i['tutor'],
                image = course.image.url,  
            )

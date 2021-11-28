@@ -89,10 +89,7 @@ function CourseEditScreen() {
 
     return (
         <div>
-            <Link to='/admin/courselist'>
-                Go Back
-            </Link>
-
+            <Link to='/admin/courselist' className='btn btn-light my-3'>Go Back</Link>
             <FormContainer>
                 <h1>Edit Course</h1>
                 {loadingUpdate && <Loader />}

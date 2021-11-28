@@ -65,15 +65,16 @@ function CourseScreen() {
                         <div>
                             <Row>
                                 <Col md={6}>
-                                    <Image src={course.image} alt={course.name} />
+                                    <Image src={course.image} alt={course.name} fluid />
                                 </Col>
                                 <Col md={3}>
                                     <ListGroup variant="flush">
-                                        <ListGroup.Item>
+                                        <ListGroup.Item className='pb-3'>
                                             <h3 className="text-uppercase">{course.name}</h3>
+                                            <Difficulty value={course.difficulty} text={`${course.numComments} comments`} color={'#f8e825'} />
                                         </ListGroup.Item>
                                         <ListGroup.Item>
-                                            <Difficulty value={course.difficulty} text={`${course.numComments} comments`} color={'#f8e825'} />
+                                            {course.numComments} Comments
                                         </ListGroup.Item>
                                         <ListGroup.Item>
                                             Tutor: {course.tutor}
@@ -141,7 +142,7 @@ function CourseScreen() {
                             </Row>
                             <Row>
                                 <Col md={6}>
-                                    <h4>Disscusion Forum</h4>
+                                    <h4 className="mt-3">Disscusion Forum</h4>
                                     {course.comments.length === 0 && 
                                     <Message variant='info'>No posts</Message>}
 

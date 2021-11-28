@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useParams, useLocation, useNavigate } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col, Image, ListGroup, Button, Card, Form } from 'react-bootstrap'
+import { Row, Col, Image, ListGroup, Button, Form } from 'react-bootstrap'
 import Message  from '../components/Message'
 import { addToSchedule, removeFromSchedule } from '../actions/scheduleActions'
 
@@ -86,22 +86,21 @@ function ScheduleScreen() {
             </Col>
 
             <Col md={4}>
-                <Card>
-                    <ListGroup variant='flush'>
+                
+                    <ListGroup variant='flush' className="mb-3">
                         <h2>Dates</h2>
                         Offline Available
+                    
                     </ListGroup>
-                    <ListGroup.Item>
                         <Button
                             type='button'
-                            className='btn-block'
+                            className='btn btn-block'
                             disabled = {scheduledLectures.length === 0}
                             onClick = {attendanceHandler}
                         >
                             Fill Attendance Preference
                         </Button>
-                    </ListGroup.Item>
-                </Card>
+                    
             </Col>
         </Row>
     )

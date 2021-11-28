@@ -1,9 +1,28 @@
 import React from 'react'
+import { ProgressBar } from 'react-bootstrap'
 
 function Difficulty({value, text, color}) {
     return (
         <div className="difficulty">
-           <span>
+            <ProgressBar 
+
+                variant= {
+                    value > 4
+                    ? 'danger'
+                    : value >= 3
+                        ? 'warning'
+                        : 'success'
+                }
+                now={
+                    value*20
+                } 
+                label={
+                    value*20 <30
+                    ? `${value*20}%`
+                    : `Difficulty ${value*20}%`
+                }
+            />
+           {/* <span>
                <i style={{ color }} className={
                 value >= 1
                     ? 'fas fa-star'
@@ -53,7 +72,7 @@ function Difficulty({value, text, color}) {
                }>
                </i>
            </span>
-           <span>{text && text}</span>
+           <span>{text && text}</span> */}
         </div>
     )
 }

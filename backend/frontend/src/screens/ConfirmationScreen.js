@@ -65,7 +65,7 @@ function ConfirmationScreen() {
                                                 {lec.tutor}
                                             </Col>
                                             <Col md={2}>
-                                                lec no{/* add lec no here */}
+                                                Lecture No: {lec.lecs}
                                             </Col>
                                         </Row>
                                     </ListGroup.Item>

@@ -74,16 +74,16 @@ function CourseListScreen() {
                         <Table striped bordered hover responsive className='table-sm'>
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    <th>SR NO.</th>
                                     <th>NAME</th>
                                     <th>TUTOR</th>
                                     {/* <th>DESCRIPTION</th> */}
                                 </tr>
                             </thead>
                             <tbody>
-                                {courses.map(course => (
+                                {courses.map((course, index) => (
                                     <tr key={course._id}>
-                                        <td>{course._id}</td>
+                                        <td>{index+1}</td>
                                         <td>{course.name}</td>
                                         <td>{course.tutor}</td>
                                         {/* <td>{course.description}</td> */}

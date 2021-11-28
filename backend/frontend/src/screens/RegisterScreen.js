@@ -96,6 +96,7 @@ function RegisterScreen() {
             <Row className='py-3'>
                 <Col>
                     Have an Account? <Link
+                    style={{textDecoration:'none'}}
                     to={redirect ? `/login?redirect=${redirect}` : '/login'}>
                     Sign In
                     </Link>

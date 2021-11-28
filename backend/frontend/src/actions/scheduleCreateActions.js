@@ -21,7 +21,7 @@ import {
     SCHEDULE_ATTEND_REQUEST, 
     SCHEDULE_ATTEND_SUCCESS, 
     SCHEDULE_ATTEND_FAIL,
-    SCHEDULE_ATTEND_RESET,
+
 } from '../constants/scheduleConstants'
 
 export const createSchedule = (schedule) => async (dispatch, getState) => {

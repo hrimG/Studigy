@@ -24,6 +24,9 @@ function UserEditScreen() {
     const userDetails = useSelector(state => state.userDetails)
     const { error, loading, user } = userDetails
 
+    const userLogin = useSelector(state => state.userLogin)
+    const { userInfo } = userLogin
+
     const userUpdate = useSelector(state => state.userUpdate)
     const { error:errorUpdate, loading:loadingUpdate, success:successUpdate } = userUpdate
 
@@ -49,12 +52,9 @@ function UserEditScreen() {
 
     return (
         <div>
-            <Link to='/admin/userlist'>
-                Go Back
-            </Link>
-
+            <Link to='/admin/userlist' className='btn btn-light my-3'>Go Back</Link>
             <FormContainer>
-                <h1>Edit User</h1>
+                <h1>Edit User</h1> 
                 {loadingUpdate && <Loader />}
                 {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
                 
@@ -83,6 +83,7 @@ function UserEditScreen() {
                         </Form.Group>
                         <Form.Group controlId='isAdmin' className='mb-3'>
                             <Form.Check
+                                disabled = {userInfo.username === user.username}
                                 type='checkbox'
                                 label='Is Admin'
                                 checked={isAdmin}

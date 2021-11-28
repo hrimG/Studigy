@@ -70,6 +70,9 @@ function ScheduleDetailsScreen() {
                                                     <Col md={2}>
                                                         {lec.tutor}
                                                     </Col>
+                                                    <Col md={3}>
+                                                        Lecture No: {lec.lecs}
+                                                    </Col>
                                                 </Row>
                                             </ListGroup.Item>
                                         ))}
@@ -97,7 +100,7 @@ function ScheduleDetailsScreen() {
                             </ListGroup>
                             {loadingAttend && <Loader />}
                             {userInfo && userInfo.isAdmin && !myschedule.isAttended && (
-                                <ListGroup.Item>
+                                
                                     <Button
                                         type='button'
                                         className='btn btn-block'
@@ -105,7 +108,7 @@ function ScheduleDetailsScreen() {
                                     >
                                         Mark As Attended
                                     </Button>
-                                </ListGroup.Item>
+                                
                             )}
                             <ListGroup variant='flush'>
                                 <h2>Vaccination Status</h2>

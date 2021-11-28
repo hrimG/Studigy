@@ -47,6 +47,7 @@ class Lecture(models.Model):
     name = models.CharField(max_length=200, null=True, blank=True)
     tutor = models.CharField(max_length=200, null=True, blank=True)
     image = models.CharField(max_length=200, null=True, blank=True)
+    lecs = models.IntegerField(null=True, blank=True, default=0)
     #date
     _id = models.AutoField(primary_key=True, editable=False)
 
